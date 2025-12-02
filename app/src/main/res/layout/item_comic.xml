@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+
+    <!-- Ảnh truyện -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="130dp"
+        android:layout_height="170dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/ivComicThumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Tên truyện: giới hạn 2 dòng, chiều cao cố định -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvComicName"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="Tên truyện dài sẽ bị cắt nếu quá 2 dòng"
+        android:textAlignment="center"
+        android:textSize="16sp"
+         />
+
+    <!-- Chương mới nhất: luôn ở đúng vị trí -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvChapterLatest"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="Chương 17"
+        android:textAlignment="center"
+        android:textColor="#666666"
+        android:textSize="14sp" />
+</LinearLayout>

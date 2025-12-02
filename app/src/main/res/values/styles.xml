@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomNavText" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+    </style>
+    <!-- styles.xml -->
+    <style name="StartChapterButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/chapter_start_color</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="EndChapterButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/chapter_end_color</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>
