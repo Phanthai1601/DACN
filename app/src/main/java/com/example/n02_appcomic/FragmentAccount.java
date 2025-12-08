@@ -26,7 +26,8 @@ public class FragmentAccount extends Fragment {
     private SessionManager sessionManager;
     private DatabaseHelper dbHelper;
 
-    public FragmentAccount() {}
+    public FragmentAccount() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +41,6 @@ public class FragmentAccount extends Fragment {
         btnyeuthich = view.findViewById(R.id.btn_yeuthich);
         btncaidat = view.findViewById(R.id.btn_caidat);
         btnabout = view.findViewById(R.id.btn_about);
-        btnphanhoi = view.findViewById(R.id.btn_phanhoi);
 
         sessionManager = new SessionManager(requireContext());
         dbHelper = new DatabaseHelper(requireContext());

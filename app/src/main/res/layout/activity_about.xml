@@ -2,16 +2,16 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
         android:background="@drawable/card_background"
-        android:padding="16dp"
-        android:layout_gravity="center_vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,53 +45,53 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thông tin ứng dụng"
-            android:textStyle="bold"
-            android:textSize="20sp"
             android:gravity="center"
-            android:paddingBottom="12dp" />
+            android:paddingBottom="12dp"
+            android:text="Thông tin ứng dụng"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Phiên bản 1.1.1\nhttps://nhom02.haui.com\nemail: nhom02@gmail.com\n2025 bản quyền của Nhóm 02"
+            android:paddingBottom="16dp"
+            android:text="Phiên bản 1.1.1\nhttps://nhom12.haui.com\nemail: nhom12@gmail.com\n2025 bản quyền của Nhóm 12"
             android:textAlignment="center"
-            android:textSize="16sp"
-            android:paddingBottom="16dp" />
+            android:textSize="16sp" />
 
         <!-- Thông tin nhóm -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Về nhóm 02"
-            android:textStyle="bold"
-            android:textSize="20sp"
             android:gravity="center"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:text="Về nhóm 12"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI\nTRƯỜNG CÔNG NGHỆ THÔNG TIN\nVÀ TRUYỀN THÔNG\n\nBÁO CÁO THỰC NGHIỆM THUỘC HỌC PHẦN\nPHÁT TRIỂN ỨNG DỤNG TRÊN THIẾT BỊ DI ĐỘNG\n\nĐỀ TÀI\nXÂY DỰNG ỨNG DỤNG ĐỌC TRUYỆN TRANH\n\nGiáo viên hướng dẫn: ThS. Đỗ Hữu Công\nLớp: 202244IT6029001"
-            android:textSize="16sp"
             android:gravity="center"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            android:text="ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI\nTRƯỜNG CÔNG NGHỆ THÔNG TIN\nVÀ TRUYỀN THÔNG\n\nBÁO CÁO THỰC NGHIỆM THUỘC HỌC PHẦN\n ĐỒ ÁN CHUYÊN NGÀNH \n\nĐỀ TÀI\nXÂY DỰNG ỨNG DỤNG ĐỌC TRUYỆN TRANH MANGA GO\n\nGiáo viên hướng dẫn: ThS. Nguyễn Thị Mỹ Bình\nLớp: 20251IT6150002"
+            android:textSize="16sp" />
 
         <!-- Danh sách thành viên -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sinh viên thực hiện"
-            android:textStyle="bold"
-            android:textSize="18sp"
             android:gravity="center"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            android:text="Sinh viên thực hiện"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Trần Duy Khánh – Code chính\nHoàng Đậu Huy – XD giao diện\nĐào Trung Hiếu – Tester\nNgô Tiến Thành – Đặc tả UC\nNguyễn Phan Anh Đức – Đặc tả UC"
-            android:textSize="14sp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="Phan Hoàng Thái\n Quách Xuân Trường\n Nguyễn Xuân Tiệp\n Nguyễn Văn Vũ"
+            android:textSize="14sp" />
     </LinearLayout>
 </ScrollView>

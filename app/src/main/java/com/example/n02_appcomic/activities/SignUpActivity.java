@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,8 +26,8 @@ import com.example.n02_appcomic.database.DatabaseHelper;
 public class SignUpActivity extends AppCompatActivity {
 
     private TextView tv_back;
-    private EditText edt_Email, edt_password, edt_re_pass, edt_username,edt_otp;
-    private Button btn_signup,btn_otp;
+    private EditText edt_Email, edt_password, edt_re_pass, edt_username, edt_otp;
+    private Button btn_signup, btn_otp;
     private DatabaseHelper dbHelper;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -42,15 +41,13 @@ public class SignUpActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
         // 2. Ánh xạ view
-        tv_back      = findViewById(R.id.tvBack);
-        edt_Email    = findViewById(R.id.edt_email);
+        tv_back = findViewById(R.id.tvBack);
+        edt_Email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.edt_pass);
-        edt_re_pass  = findViewById(R.id.edt_re_pass);
+        edt_re_pass = findViewById(R.id.edt_re_pass);
         edt_username = findViewById(R.id.edt_username);
-        edt_otp = findViewById(R.id.edt_otp);
-        btn_signup   = findViewById(R.id.btn_signup);
-        btn_otp = findViewById(R.id.btn_otp);
-        View root    = findViewById(R.id.main);
+        btn_signup = findViewById(R.id.btn_signup);
+        View root = findViewById(R.id.main);
 
         // 3. Thiết lập EdgeToEdge padding
         if (root != null) {
@@ -95,33 +92,27 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void handleSignUp() {
-        String email    = edt_Email.getText().toString().trim();
+        String email = edt_Email.getText().toString().trim();
         String password = edt_password.getText().toString().trim();
-        String re_pass  = edt_re_pass.getText().toString().trim();
+        String re_pass = edt_re_pass.getText().toString().trim();
         String username = edt_username.getText().toString().trim();
         // Validate
         if (email.isEmpty() || password.isEmpty() || username.isEmpty() || re_pass.isEmpty()) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
-        }
-        else if(!isValidEmail(email)){
+        } else if (!isValidEmail(email)) {
             Toast.makeText(this, "Email không hợp lệ.", Toast.LENGTH_SHORT).show();
             return;
-        }
-
-        else if (!isValidPassword(password)) {
+        } else if (!isValidPassword(password)) {
             Toast.makeText(this, "Mật khẩu phải ≥8 ký tự, chứa ít nhất 1 chữ hoa và 1 ký tự đặc biệt.", Toast.LENGTH_LONG).show();
             return;
-        }
-        else if (!password.equals(re_pass)) {
+        } else if (!password.equals(re_pass)) {
             Toast.makeText(this, "Mật khẩu xác nhận không đúng", Toast.LENGTH_SHORT).show();
             return;
-        }
-        else if (!isValidUsername(username)) {
+        } else if (!isValidUsername(username)) {
             Toast.makeText(this, "User name tối đa 20 ký tự.", Toast.LENGTH_SHORT).show();
             return;
-        }
-        else if (!edt_otp.getText().toString().equals("123456")) {
+        } else if (!edt_otp.getText().toString().equals("123456")) {
             Toast.makeText(this, "Mã OTP không đúng.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -149,10 +140,12 @@ public class SignUpActivity extends AppCompatActivity {
     public boolean isValidEmail(CharSequence email) {
         return email != null && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+
     // kiểm tra username < 20 ký tự
     private boolean isValidUsername(String username) {
         return username.length() <= 20;
     }
+
     //kiểm tra password
     // - ít nhất 8 ký tự
     // - ít nhất 1 chữ hoa
