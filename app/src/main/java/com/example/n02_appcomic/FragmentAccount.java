@@ -22,9 +22,12 @@ import com.example.n02_appcomic.utils.SessionManager;
 public class FragmentAccount extends Fragment {
 
     private TextView tvName, tvEmail;
-    private Button btnyeuthich, btncaidat, btnabout, btnphanhoi, btnLogout;
+    private Button  btnLogout;
     private SessionManager sessionManager;
     private DatabaseHelper dbHelper;
+
+    private View layoutFavorite, layoutSetting, layoutAbout;
+
 
     public FragmentAccount() {
     }
@@ -34,13 +37,13 @@ public class FragmentAccount extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
-        // Ánh xạ view
         tvName = view.findViewById(R.id.tv_name);
         tvEmail = view.findViewById(R.id.tv_email);
         btnLogout = view.findViewById(R.id.btn_logout);
-        btnyeuthich = view.findViewById(R.id.btn_yeuthich);
-        btncaidat = view.findViewById(R.id.btn_caidat);
-        btnabout = view.findViewById(R.id.btn_about);
+        layoutFavorite = view.findViewById(R.id.layout_favorite);
+        layoutSetting  = view.findViewById(R.id.layout_setting);
+        layoutAbout    = view.findViewById(R.id.layout_about);
+
 
         sessionManager = new SessionManager(requireContext());
         dbHelper = new DatabaseHelper(requireContext());
@@ -56,20 +59,18 @@ public class FragmentAccount extends Fragment {
                 tvEmail.setText(user.getEmail());
             }
         }
-        btnyeuthich.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), FavoriteActivity.class);
-            startActivity(intent);
-        });
-        btncaidat.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), SettingActivity.class);
-            startActivity(intent);
+        layoutFavorite.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), FavoriteActivity.class));
         });
 
-        btnabout.setOnClickListener(v -> {
-            // Chuyển đến màn About
-            Intent intent = new Intent(requireContext(), AboutActivity.class);
-            startActivity(intent);
+        layoutSetting.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), SettingActivity.class));
         });
+
+        layoutAbout.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), AboutActivity.class));
+        });
+
 
 
         // Xử lý nút đăng xuất
