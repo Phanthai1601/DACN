@@ -3,10 +3,15 @@ package com.example.n02_appcomic;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,33 +54,35 @@ public class ReadChapterActivity extends AppCompatActivity {
     private List<String> chapterApiList;
     private int currentIndex = 0;
     private Observer<ChapterContentResponse> chapterObserver;
+    private AppCompatTextView tvNameComic;
+    private ImageView imvBack;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading_chapter);
-
-        /// ///Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbarRead);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // nút back
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        /// ///
         recyclerView = findViewById(R.id.rcvImageChapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(false);
+        imvBack = findViewById(R.id.imgBack);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_reading_chapter), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         comicViewModel = new ViewModelProvider(this).get(ComicViewModel.class);
 
         chapterApiList = getIntent().getStringArrayListExtra("chapter_api_list");
         currentIndex = getIntent().getIntExtra("current_index", 0);
+        String comicName = getIntent().getStringExtra("comic_name");
+        tvNameComic = findViewById(R.id.name_comic_txt);
+        tvNameComic.setText(comicName);
 
         Button btnPrev = findViewById(R.id.btnPreviousChapter);
         Button btnNext = findViewById(R.id.btnNextChapter);
-
+        initAction();
 
         btnPrev.setOnClickListener(v -> {
             if (currentIndex > 0) {
@@ -113,6 +120,10 @@ public class ReadChapterActivity extends AppCompatActivity {
         };
 
         loadChapter(); // load chap đầu tiên
+    }
+
+    private void initAction(){
+        imvBack.setOnClickListener(v -> onBackPressed());
     }
 
     private void loadChapter() {

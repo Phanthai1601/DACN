@@ -2,16 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="3dp"
     android:layout_marginBottom="10sp"
-    >
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:layout_width="80dp"
@@ -19,7 +18,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivComicThumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -29,29 +28,33 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="12dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvComicName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tên truyện dài sẽ bị cắt nếu quá 2 dòng"
-                android:maxLines="2"
                 android:ellipsize="end"
+                android:fontFamily="@font/outfit_bold"
+                android:includeFontPadding="false"
+                android:maxLines="2"
+                android:text="Tên truyện dài sẽ bị cắt nếu quá 2 dòng"
+                android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvChapterLatest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:fontFamily="@font/outfit_regular"
+                android:includeFontPadding="false"
                 android:text="Chương 17"
-                android:textSize="14sp"
-                android:textColor="#666666" />
+                android:textColor="#666666"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

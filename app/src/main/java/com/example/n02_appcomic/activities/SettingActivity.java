@@ -3,6 +3,7 @@ package com.example.n02_appcomic.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -17,6 +18,7 @@ public class SettingActivity extends AppCompatActivity {
     private SwitchMaterial switchDarkMode;
     //luu trang thai
     private SharedPreferences prefs;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +34,11 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        // Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbarSetting);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Cài đặt");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // nút back
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        imageView = findViewById(R.id.imgBack);
+        imageView.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
 
         // Switch
         switchDarkMode = findViewById(R.id.switchDarkMode);

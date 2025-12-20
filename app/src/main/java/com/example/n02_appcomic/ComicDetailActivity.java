@@ -1,8 +1,6 @@
 package com.example.n02_appcomic;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -12,7 +10,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +39,11 @@ public class ComicDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comic_detail);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_comic_detail), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         RecyclerView recyclerView = findViewById(R.id.rvChapters);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -79,7 +84,8 @@ public class ComicDetailActivity extends AppCompatActivity {
                         }
                         Intent intent = new Intent(ComicDetailActivity.this, ReadChapterActivity.class);
                         intent.putStringArrayListExtra("chapter_api_list", apiList);
-                        intent.putExtra("current_index", 0); // Chap đầu
+                        intent.putExtra("current_index", 0);
+                        intent.putExtra("comic_name", item.getName());
                         startActivity(intent);
                     });
 
@@ -90,7 +96,8 @@ public class ComicDetailActivity extends AppCompatActivity {
                         }
                         Intent intent = new Intent(ComicDetailActivity.this, ReadChapterActivity.class);
                         intent.putStringArrayListExtra("chapter_api_list", apiList);
-                        intent.putExtra("current_index", chapterList.size() - 1); // Chap cuối
+                        intent.putExtra("current_index", chapterList.size() - 1);
+                        intent.putExtra("comic_name", item.getName());
                         startActivity(intent);
                     });
 
@@ -105,6 +112,7 @@ public class ComicDetailActivity extends AppCompatActivity {
                         Intent intent = new Intent(ComicDetailActivity.this, ReadChapterActivity.class);
                         intent.putStringArrayListExtra("chapter_api_list", apiList);
                         intent.putExtra("current_index", index);
+                        intent.putExtra("comic_name", item.getName());
                         startActivity(intent);
                     });
 
@@ -114,7 +122,7 @@ public class ComicDetailActivity extends AppCompatActivity {
 
                     recyclerView.setAdapter(chapterAdapter);
 
-                    Log.d("ITEM",item.getSlug() + item.getID() + " " + item.getCategory() + " " + item.getContent());
+                    Log.d("ITEM", item.getSlug() + item.getID() + " " + item.getCategory() + " " + item.getContent());
                 }
             }
         });

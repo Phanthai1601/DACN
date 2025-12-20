@@ -4,20 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_category"
     android:background="@drawable/bg_appp"
     android:orientation="vertical">
 
-    <!-- Toolbar -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarCategoryComic"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:background="?attr/colorPrimary"
-        android:navigationIcon="@drawable/ic_back"
-        android:titleTextColor="@android:color/white" />
 
-    <!-- Tiêu đề thể loại -->
+
     <TextView
         android:id="@+id/tvCategoryTitle"
         android:layout_width="match_parent"

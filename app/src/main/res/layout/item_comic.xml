@@ -97,7 +97,6 @@
                 android:gravity="center"
                 android:fontFamily="@font/outfit_regular"
                 android:maxLines="1"
-                android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>
 

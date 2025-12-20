@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -42,16 +43,42 @@ public class ChapterImageAdapter extends RecyclerView.Adapter<ChapterImageAdapte
         ChapterImage img = imageList.get(position);
         String fullImageUrl = baseUrl + "/" + chapterPath + "/" + img.getImage_file();
 
-        // Preload ảnh để cuộn mượt
-        Glide.with(context).load(fullImageUrl).preload();
+        // Reset trạng thái khi recycle
+        holder.loadingView.setVisibility(View.VISIBLE);
+        holder.imageView.setImageDrawable(null);
 
-        // Load ảnh
         Glide.with(context)
                 .load(fullImageUrl)
-                .dontAnimate() // tránh hiệu ứng gây nhấp nháy
-                .fitCenter() // giữ tỉ lệ
+                .fitCenter()
+                .dontAnimate()
+                .listener(new com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(
+                            @Nullable com.bumptech.glide.load.engine.GlideException e,
+                            Object model,
+                            com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target,
+                            boolean isFirstResource
+                    ) {
+                        holder.loadingView.setVisibility(View.GONE);
+                        Log.e("GLIDE", "Load image failed: " + fullImageUrl, e);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(
+                            android.graphics.drawable.Drawable resource,
+                            Object model,
+                            com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target,
+                            com.bumptech.glide.load.DataSource dataSource,
+                            boolean isFirstResource
+                    ) {
+                        holder.loadingView.setVisibility(View.GONE);
+                        return false; // Glide set ảnh vào ImageView
+                    }
+                })
                 .into(holder.imageView);
     }
+
 
     @Override
     public int getItemCount() {
@@ -60,11 +87,14 @@ public class ChapterImageAdapter extends RecyclerView.Adapter<ChapterImageAdapte
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        View loadingView;
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.chapterImageView);
+            loadingView = itemView.findViewById(R.id.loadingView);
         }
     }
+
 }
 

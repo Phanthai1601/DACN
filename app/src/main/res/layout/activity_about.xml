@@ -1,97 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_appp"
-    android:padding="16dp">
+    android:id="@+id/activity_about"
+    android:background="@drawable/bg_appp">
 
     <LinearLayout
+        android:id="@+id/action_bar_ln"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/outfit_bold"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="16dp"
+            android:text="Về chúng tôi"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAppInfoTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/card_background"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:fontFamily="@font/outfit_bold"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
+        android:text="Thông tin ứng dụng"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/action_bar_ln" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <ImageView
-                android:id="@+id/imgBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:clickable="true"
-                android:contentDescription="Quay lại"
-                android:focusable="true"
-                android:padding="4dp"
-                android:src="@drawable/ic_back_left" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:text="Về chúng tôi"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAppInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/outfit_regular"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
+        android:text="Phiên bản 1.1.1\nhttps://nhom12.haui.com\nemail: nhom12@gmail.com\n2025 bản quyền của Nhóm 12"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvAppInfoTitle" />
 
 
-        <!-- Thông tin ứng dụng -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="12dp"
-            android:text="Thông tin ứng dụng"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvGroupTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/outfit_bold"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
+        android:text="Về nhóm 12"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/tvAppInfo" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:text="Phiên bản 1.1.1\nhttps://nhom12.haui.com\nemail: nhom12@gmail.com\n2025 bản quyền của Nhóm 12"
-            android:textAlignment="center"
-            android:textSize="16sp" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvGroupInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/outfit_regular"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
+        android:text="ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI\nTRƯỜNG CÔNG NGHỆ THÔNG TIN\nVÀ TRUYỀN THÔNG\n\nBÁO CÁO THỰC NGHIỆM THUỘC HỌC PHẦN\nĐỒ ÁN CHUYÊN NGÀNH\n\nĐỀ TÀI\nXÂY DỰNG ỨNG DỤNG ĐỌC TRUYỆN TRANH MANGA GO\n\nGiáo viên hướng dẫn: ThS. Nguyễn Thị Mỹ Bình\nLớp: 20251IT6150002"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvGroupTitle" />
 
-        <!-- Thông tin nhóm -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="8dp"
-            android:text="Về nhóm 12"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="16dp"
-            android:text="ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI\nTRƯỜNG CÔNG NGHỆ THÔNG TIN\nVÀ TRUYỀN THÔNG\n\nBÁO CÁO THỰC NGHIỆM THUỘC HỌC PHẦN\n ĐỒ ÁN CHUYÊN NGÀNH \n\nĐỀ TÀI\nXÂY DỰNG ỨNG DỤNG ĐỌC TRUYỆN TRANH MANGA GO\n\nGiáo viên hướng dẫn: ThS. Nguyễn Thị Mỹ Bình\nLớp: 20251IT6150002"
-            android:textSize="16sp" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMemberTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/outfit_bold"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
+        android:text="Sinh viên thực hiện"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/tvGroupInfo" />
 
-        <!-- Danh sách thành viên -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="8dp"
-            android:text="Sinh viên thực hiện"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMembers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/outfit_regular"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
+        android:text="Phan Hoàng Thái\nQuách Xuân Trường\nNguyễn Xuân Tiệp\nNguyễn Văn Vũ"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/tvMemberTitle" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Phan Hoàng Thái\n Quách Xuân Trường\n Nguyễn Xuân Tiệp\n Nguyễn Văn Vũ"
-            android:textSize="14sp" />
-    </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

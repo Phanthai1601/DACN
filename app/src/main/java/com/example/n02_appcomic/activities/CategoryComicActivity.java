@@ -7,6 +7,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,19 +40,17 @@ public class CategoryComicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_comic);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_category), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         // View
         rvCategoryComics = findViewById(R.id.rvCategoryComics);
         tvCategoryTitle = findViewById(R.id.tvCategoryTitle);
-        Toolbar toolbar = findViewById(R.id.toolbarCategoryComic);
 
-        // Toolbar
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.setNavigationOnClickListener(v -> finish());
-        }
-
+       
         // Intent data
         Intent intent = getIntent();
         slug = intent.getStringExtra("slug");

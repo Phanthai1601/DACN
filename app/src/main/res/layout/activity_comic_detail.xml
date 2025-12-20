@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_appp"
+    android:id="@+id/activity_comic_detail"
     android:orientation="vertical">
 
     <LinearLayout
@@ -32,12 +33,13 @@
 
         <ImageView
             android:id="@+id/imgFavorite"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="4dp"
             android:clickable="true"
             android:contentDescription="Quay lại"
             android:focusable="true"
-            android:padding="4dp"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_favorite_border" />
 
     </LinearLayout>
@@ -58,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
+        android:fontFamily="@font/outfit_bold"
         android:gravity="center"
         android:includeFontPadding="false"
         android:paddingHorizontal="16dp"
@@ -73,7 +76,6 @@
         android:id="@+id/group_btn_ln"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
         android:orientation="horizontal"
         android:weightSum="2"
@@ -81,22 +83,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvName">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnReadFirstChapter"
-            style="@style/StartChapterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20sp"
+            android:layout_marginHorizontal="16dp"
             android:layout_weight="1"
-            android:text="Chương đầu" />
+            android:background="@drawable/bg_primary_btn"
+            android:fontFamily="@font/outfit_medium"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="0dp"
+            android:text="Chap đầu"
+            android:textAllCaps="false"
+            android:textColor="@color/color_2D2D2D"
+            android:textSize="16dp"
+            app:backgroundTint="@null"
+            app:cornerRadius="40dp"
+            app:iconPadding="0dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnReadLastChapter"
-            style="@style/EndChapterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_weight="1"
-            android:text="Chương cuối" />
+            android:background="@drawable/bg_primary_btn"
+            android:fontFamily="@font/outfit_medium"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="0dp"
+            android:text="Chap cuối"
+            android:textAllCaps="false"
+            android:textColor="@color/color_2D2D2D"
+            android:textSize="16dp"
+            app:backgroundTint="@null"
+            app:cornerRadius="40dp"
+            app:iconPadding="0dp" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -104,6 +129,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/outfit_bold"
         android:includeFontPadding="false"
         android:paddingHorizontal="16dp"
         android:text="Danh sách chương:"

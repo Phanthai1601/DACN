@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,13 +35,20 @@ public class FragmentCategory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
-        // Setup Toolbar
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-
+        ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(
+                    systemBars.left,
+                    systemBars.top,
+                    systemBars.right,
+                    systemBars.bottom
+            );
+            return WindowInsetsCompat.CONSUMED;
+        });
         rvCategories = view.findViewById(R.id.rvCategories);
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        categoryList = getMockCategories(); // Có thể đổi bằng dữ liệu API sau này
+        categoryList = getMockCategories();
 
         adapter = new CategoryAdapter(getContext(), categoryList, category -> {
             // Mở danh sách truyện theo thể loại khi click

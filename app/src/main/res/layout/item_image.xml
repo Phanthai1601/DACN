@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-    <ImageView
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/chapterImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        />
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <com.example.n02_appcomic.ui.CustomLoadingView
+        android:id="@+id/loadingView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/chapterImageView"
+        app:layout_constraintEnd_toEndOf="@+id/chapterImageView"
+        app:layout_constraintStart_toStartOf="@+id/chapterImageView"
+        app:layout_constraintTop_toTopOf="@+id/chapterImageView" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

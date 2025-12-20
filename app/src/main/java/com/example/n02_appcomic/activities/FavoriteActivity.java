@@ -1,10 +1,13 @@
 package com.example.n02_appcomic.activities;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,25 +29,24 @@ public class FavoriteActivity extends AppCompatActivity {
     SessionManager sessionManager;
     private ComicViewModel comicViewModel;
     private List<Item> favoriteComics = new ArrayList<>();
+    private ImageView imv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
 
-        // Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbarFavorite);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Danh sách truyện yêu thích");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // nút back
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
-
         // RecyclerView
         recyclerFavorites = findViewById(R.id.recyclerFavorites);
         recyclerFavorites.setLayoutManager(new LinearLayoutManager(this));
+        imv = findViewById(R.id.imgBack);
+        imv.setOnClickListener(v -> finish());
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_favorite), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
 
         // DB & Session
         dbHelper = new DatabaseHelper(this);
