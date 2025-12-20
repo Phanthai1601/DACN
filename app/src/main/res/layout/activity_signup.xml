@@ -1,161 +1,244 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_appp"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp"
     tools:context=".activities.SignUpActivity">
 
-    <!-- Header -->
     <LinearLayout
+        android:id="@+id/action_bar_ln"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="&lt;"
-            android:textSize="24sp" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_imv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSignupTitle"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:fontFamily="@font/outfit_bold"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="16dp"
             android:text="Đăng kí"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
     </LinearLayout>
 
-    <!-- Email -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/email_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/outfit_bold"
+        android:paddingHorizontal="16dp"
         android:text="ĐỊA CHỈ EMAIL *"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/action_bar_ln" />
 
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edt_email"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="4dp"
-        android:hint="Nhập email của bạn" />
+        android:background="@drawable/bg_edit_text"
+        android:fontFamily="@font/outfit_regular"
+        android:hint="Nhập email của bạn"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/color_2D2D2D"
+        android:textColorHint="#9E9E9E"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_txt" />
 
-    <TextView
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/password_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="MÃ XÁC THỰC *"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-
-
-    <!-- Password -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:fontFamily="@font/outfit_bold"
+        android:paddingHorizontal="16dp"
         android:text="MẬT KHẨU *"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email" />
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edt_pass"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="4dp"
-        android:drawableEnd="@drawable/eye_close"
-        android:hint="Nhập mật khẩu"
-        android:inputType="textPassword"
-        android:longClickable="false"
-        android:textIsSelectable="false" />
+        android:background="@drawable/bg_edit_text"
+        android:fontFamily="@font/outfit_regular"
+        android:hint="Nhập mật khẩu của bạn"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/color_2D2D2D"
+        android:textColorHint="#9E9E9E"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_txt" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/hint_pw_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:fontFamily="@font/outfit_regular"
+        android:paddingHorizontal="16dp"
         android:text="6–16 kí tự"
-        android:textSize="10sp" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_pass" />
 
     <!-- Re-type Password -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/re_pw_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/outfit_bold"
+        android:paddingHorizontal="16dp"
         android:text="NHẬP LẠI MẬT KHẨU *"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hint_pw_txt" />
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edt_re_pass"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="4dp"
-        android:hint="Nhập mật khẩu"
-        android:inputType="textPassword" />
+        android:background="@drawable/bg_edit_text"
+        android:fontFamily="@font/outfit_regular"
+        android:hint="Nhập lại mật khẩu"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/color_2D2D2D"
+        android:textColorHint="#9E9E9E"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/re_pw_txt" />
 
-    <TextView
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="6–16 kí tự"
-        android:textSize="10sp" />
-
-    <!-- Nickname -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/user_name_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/outfit_bold"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
         android:text="TÊN NGƯỜI DÙNG *"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_re_pass" />
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edt_username"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="4dp"
-        android:hint="Tên người dùng" />
+        android:background="@drawable/bg_edit_text"
+        android:fontFamily="@font/outfit_regular"
+        android:hint="Nhập tên người dùng"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/color_2D2D2D"
+        android:textColorHint="#9E9E9E"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_name_txt" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/hint_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:fontFamily="@font/outfit_regular"
+        android:paddingHorizontal="16dp"
         android:text="Tối đa 20 kí tự"
-        android:textSize="10sp" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_username" />
 
-    <!-- Terms & Privacy -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/cs_1_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/outfit_regular"
+        android:paddingHorizontal="16dp"
         android:text="@string/chinh_sach"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hint_user_name" />
 
-    <!-- Marketing info -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/cs_2_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:fontFamily="@font/outfit_regular"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
         android:text="@string/chinh_sach2"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cs_1_txt" />
 
-    <!-- SIGN UP Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_signup"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:text="ĐĂNG KÍ" />
-</LinearLayout>
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bg_primary_btn"
+        android:fontFamily="@font/outfit_medium"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="0dp"
+        android:text="Đăng ký"
+        android:textAllCaps="false"
+        android:textColor="@color/color_2D2D2D"
+        android:textSize="16dp"
+        app:backgroundTint="@null"
+        app:cornerRadius="40dp"
+        app:iconPadding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cs_2_txt" />
+</androidx.constraintlayout.widget.ConstraintLayout>

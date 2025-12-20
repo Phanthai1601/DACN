@@ -13,7 +13,6 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about); // Gắn layout
 
-        // Tìm ImageView và gắn sự kiện click để quay lại
         ImageView imgBack = findViewById(R.id.imgBack);
         imgBack.setOnClickListener(v -> {
             onBackPressed();

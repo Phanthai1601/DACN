@@ -15,24 +15,24 @@ import com.example.n02_appcomic.ComicDetailActivity;
 import com.example.n02_appcomic.R;
 import com.example.n02_appcomic.model.ChaptersLatest;
 import com.example.n02_appcomic.model.Item;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHolder> {
 
-    private List<Item> comics;
-    private OnComicClickListener listener;
+    private List<Item> comics = new ArrayList<>();
+    private boolean isLoading = true;
 
-    public interface OnComicClickListener {
-        void onComicClick(Item comic);
-    }
-
-    public ComicAdapter(OnComicClickListener listener) {
-        this.listener = listener;
+    public void setLoading(boolean loading) {
+        isLoading = loading;
+        notifyDataSetChanged();
     }
 
     public void setComics(List<Item> comics) {
         this.comics = comics;
+        isLoading = false;
         notifyDataSetChanged();
     }
 
@@ -46,12 +46,25 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ComicViewHolder holder, int position) {
+
+        if (isLoading) {
+            holder.shimmerLayout.setVisibility(View.VISIBLE);
+            holder.contentLayout.setVisibility(View.GONE);
+            holder.shimmerLayout.startShimmer();
+            return;
+        }
+
         Item item = comics.get(position);
+
+        holder.shimmerLayout.stopShimmer();
+        holder.shimmerLayout.setVisibility(View.GONE);
+        holder.contentLayout.setVisibility(View.VISIBLE);
+
         holder.name.setText(item.getName());
-        List<ChaptersLatest> latestChapters = item.getChaptersLatests();
-        if (latestChapters != null && !latestChapters.isEmpty()) {
-            String chapterText = latestChapters.get(0).getChapterName(); // hoặc getChapterTitle()
-            holder.chapterLatest.setText("Chương "+ chapterText);
+
+        List<ChaptersLatest> chapters = item.getChaptersLatests();
+        if (chapters != null && !chapters.isEmpty()) {
+            holder.chapterLatest.setText("Chương " + chapters.get(0).getChapterName());
         } else {
             holder.chapterLatest.setText("Chưa có chương");
         }
@@ -61,28 +74,32 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
                 .load(imageUrl)
                 .into(holder.thumbnail);
 
-        holder.thumbnail.setOnClickListener(v -> {
-            Intent intent = new Intent(holder.itemView.getContext(), ComicDetailActivity.class);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), ComicDetailActivity.class);
             intent.putExtra("slug", item.getSlug());
-            holder.itemView.getContext().startActivity(intent);
+            v.getContext().startActivity(intent);
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return comics != null ? comics.size() : 0;
+        return isLoading ? 6 : comics.size();
     }
 
-    public static class ComicViewHolder extends RecyclerView.ViewHolder {
-        TextView name, chapterLatest;
+    static class ComicViewHolder extends RecyclerView.ViewHolder {
+
         ImageView thumbnail;
+        TextView name, chapterLatest;
+        ShimmerFrameLayout shimmerLayout;
+        View contentLayout;
 
         public ComicViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.tvComicName);
             thumbnail = itemView.findViewById(R.id.ivComicThumbnail);
+            name = itemView.findViewById(R.id.tvComicName);
             chapterLatest = itemView.findViewById(R.id.tvChapterLatest);
+            shimmerLayout = itemView.findViewById(R.id.shimmerLayout);
+            contentLayout = itemView.findViewById(R.id.contentLayout);
         }
     }
 }

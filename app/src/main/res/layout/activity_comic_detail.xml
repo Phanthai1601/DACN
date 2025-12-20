@@ -1,35 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:layout_marginTop="10dp">
+    android:background="@drawable/bg_appp"
+    android:orientation="vertical">
 
-    <!-- Nút quay lại -->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:id="@+id/action_bar_ln"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Icon bên trái Back -->
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
             android:clickable="true"
-            android:contentDescription="Icon trái"
             android:focusable="true"
-            android:padding="4dp"
-            android:src="@drawable/ic_back_left" />
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back" />
 
-        <!-- View trống để đẩy icon phải sang sát lề -->
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <!-- Icon bên phải Favorite -->
         <ImageView
             android:id="@+id/imgFavorite"
             android:layout_width="24dp"
@@ -43,27 +43,43 @@
     </LinearLayout>
 
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imv"
         android:layout_width="200dp"
         android:layout_height="250dp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/action_bar_ln" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
         android:gravity="center"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
         android:paddingTop="8dp"
         android:text="Tên truyện: "
         android:textSize="24dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imv" />
 
     <LinearLayout
+        android:id="@+id/group_btn_ln"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2">
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvName">
 
         <Button
             android:id="@+id/btnReadFirstChapter"
@@ -83,16 +99,28 @@
             android:text="Chương cuối" />
     </LinearLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:layout_marginTop="16dp"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="16dp"
         android:text="Danh sách chương:"
-        android:textStyle="bold" />
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_btn_ln" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChapters"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
-</LinearLayout>
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_txt" />
+</androidx.constraintlayout.widget.ConstraintLayout>

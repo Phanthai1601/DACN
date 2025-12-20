@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -25,7 +24,6 @@ import com.example.n02_appcomic.database.DatabaseHelper;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private TextView tv_back;
     private EditText edt_Email, edt_password, edt_re_pass, edt_username, edt_otp;
     private Button btn_signup, btn_otp;
     private DatabaseHelper dbHelper;
@@ -41,13 +39,16 @@ public class SignUpActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
         // 2. Ánh xạ view
-        tv_back = findViewById(R.id.tvBack);
         edt_Email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.edt_pass);
         edt_re_pass = findViewById(R.id.edt_re_pass);
         edt_username = findViewById(R.id.edt_username);
         btn_signup = findViewById(R.id.btn_signup);
         View root = findViewById(R.id.main);
+        edt_password.setCompoundDrawablesWithIntrinsicBounds(
+                0, 0, R.drawable.eye_close, 0
+        );
+
 
         // 3. Thiết lập EdgeToEdge padding
         if (root != null) {
@@ -60,35 +61,47 @@ public class SignUpActivity extends AppCompatActivity {
             });
         }
 
-        // 4. Quay lại Login
-        tv_back.setOnClickListener(v -> {
-            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-            finish();
-        });
-
         // 5. Xử lý sign up
         btn_signup.setOnClickListener(v -> handleSignUp());
 
         // 6. icon eye trong password
         edt_password.setOnTouchListener((v, event) -> {
             final int DRAWABLE_RIGHT = 2;
+
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >= (edt_password.getRight() - edt_password.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                    if (edt_password.getInputType() == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
-                        // Hiện mật khẩu
-                        edt_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                        edt_password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye_open, 0);
+
+                if (edt_password.getCompoundDrawables()[DRAWABLE_RIGHT] == null)
+                    return false; // ✅ FIX CRASH
+
+                int drawableWidth =
+                        edt_password.getCompoundDrawables()[DRAWABLE_RIGHT]
+                                .getBounds().width();
+
+                if (event.getRawX() >= (edt_password.getRight() - drawableWidth)) {
+
+                    if (edt_password.getInputType()
+                            == (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+
+                        edt_password.setInputType(
+                                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        edt_password.setCompoundDrawablesWithIntrinsicBounds(
+                                0, 0, R.drawable.eye_open, 0);
+
                     } else {
-                        // Ẩn mật khẩu
-                        edt_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        edt_password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye_close, 0);
+
+                        edt_password.setInputType(
+                                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        edt_password.setCompoundDrawablesWithIntrinsicBounds(
+                                0, 0, R.drawable.eye_close, 0);
                     }
-                    edt_password.setSelection(edt_password.length()); // Giữ con trỏ ở cuối
+
+                    edt_password.setSelection(edt_password.length());
                     return true;
                 }
             }
             return false;
         });
+
     }
 
     private void handleSignUp() {

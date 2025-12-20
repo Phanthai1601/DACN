@@ -1,51 +1,106 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    >
+    android:layout_margin="6dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="2dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp"
+    app:cardUseCompatPadding="true">
 
-    <!-- Ảnh truyện -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="130dp"
-        android:layout_height="170dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true">
-
-        <ImageView
-            android:id="@+id/ivComicThumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-    </androidx.cardview.widget.CardView>
-
-    <!-- Tên truyện: giới hạn 2 dòng, chiều cao cố định -->
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvComicName"
-        android:layout_width="120dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="6dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="2"
-        android:text="Tên truyện dài sẽ bị cắt nếu quá 2 dòng"
-        android:textAlignment="center"
-        android:textSize="16sp"
-         />
-
-    <!-- Chương mới nhất: luôn ở đúng vị trí -->
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvChapterLatest"
-        android:layout_width="120dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="1"
-        android:text="Chương 17"
-        android:textAlignment="center"
-        android:textColor="#666666"
-        android:textSize="14sp" />
-</LinearLayout>
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <!-- SHIMMER -->
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:shimmer_auto_start="true"
+            app:shimmer_duration="1200">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="130dp"
+                    android:layout_height="170dp"
+                    app:cardCornerRadius="12dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#FFFFFF" />
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="120dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#E0E0E0" />
+
+                <View
+                    android:layout_width="80dp"
+                    android:layout_height="14dp"
+                    android:layout_marginTop="6dp"
+                    android:background="#E0E0E0" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="130dp"
+                android:layout_height="170dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivComicThumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvComicName"
+                android:layout_width="120dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:maxLines="2"
+                android:fontFamily="@font/outfit_regular"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvChapterLatest"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:fontFamily="@font/outfit_regular"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

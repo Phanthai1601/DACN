@@ -7,6 +7,26 @@
     <color name="chapter_end_color">#F44336</color>
     <color name="purple_400">#0885FD</color>
     <color name="purple_700">#9C27B0</color>
+    <color name="color_50_FFFFFF">#80FFFFFF</color>
+    <color name="color_90_FFFFFF">#E6FFFFFF</color>
+    <color name="color_30915D">#30915D</color>
+    <color name="color_50_1F1F1F">#801F1F1F</color>
+    <color name="color_FEFBF0">#FEFBF0</color>
+    <color name="color_FBF2A1">#FBF2A1</color>
+    <color name="color_5ABA87">#5ABA87</color>
+    <color name="color_35_000000">#59000000</color>
+    <color name="color_E5E5E5">#E5E5E5</color>
+    <color name="color_202020">#202020</color>
+    <color name="color_454545">#454545</color>
+    <color name="color_0_5ABA87">#005ABA87</color>
+    <color name="demo">#D9FFFFFF</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_65_FFFFFF">#FFFFFFFF</color>
+    <color name="color_85_FFFFFF">#D9FFFFFF</color>
+    <color name="color_2D2D2D">#2D2D2D</color>
+    <color name="color_80_FFFFFF">#CCFFFFFF</color>
+    <color name="color_fbfbfb">#fbfbfb</color>
+    <color name="color_10B981">#10B981</color>
 
     <!-- Màu đỏ -->
 

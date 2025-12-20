@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_appp"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -26,17 +27,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:background="#EEEEEE"
         android:gravity="center"
-        android:padding="12dp"
-        android:background="#EEEEEE">
+        android:orientation="horizontal"
+        android:padding="12dp">
 
         <Button
             android:id="@+id/btnPreviousChapter"
+            style="@style/StartChapterButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            style="@style/StartChapterButtonStyle"
             android:text="Chương trước" />
 
         <Space
@@ -45,8 +46,8 @@
 
         <Button
             android:id="@+id/btnNextChapter"
-            android:layout_width="0dp"
             style="@style/EndChapterButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Chương sau" />

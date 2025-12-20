@@ -33,20 +33,7 @@ public class FragmentCategory extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
         // Setup Toolbar
-        Toolbar toolbar = view.findViewById(R.id.toolbarCategory);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        if (activity != null) {
-            activity.setSupportActionBar(toolbar);
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            activity.getSupportActionBar().setTitle("Thể loại truyện");
-            toolbar.setNavigationOnClickListener(v -> {
-                if (getActivity() instanceof MainActivity) {
-                    ((MainActivity) getActivity()).switchToHome(); // Gọi hàm từ MainActivity
-                }
-            });
-
-
-        }
 
         rvCategories = view.findViewById(R.id.rvCategories);
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));

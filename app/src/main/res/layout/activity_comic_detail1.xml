@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_appp"
+
     android:orientation="vertical">
 
     <!-- Toolbar có nút back -->
@@ -11,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="Chi tiết truyện"
         app:titleTextColor="@android:color/white" />
 
@@ -76,9 +78,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginTop="12dp"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <!-- Nút 1 -->
                         <Button
@@ -86,36 +88,37 @@
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:text="Tiếp tục đọc"
-                            android:textSize="14sp"
                             android:backgroundTint="@color/purple_700"
-                            android:textColor="@android:color/white" />
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Tiếp tục đọc"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
 
                         <!-- Nút 2 -->
                         <Button
                             android:id="@+id/btnReadFirstChapter"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
-                            android:layout_weight="1"
                             android:layout_marginStart="8dp"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:text="Đọc từ đầu"
-                            android:textSize="14sp"
+                            android:layout_weight="1"
                             android:backgroundTint="@color/purple_700"
-                            android:textColor="@android:color/white" />
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Đọc từ đầu"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <Button
+                        android:id="@+id/btnYeuthich"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:id="@+id/btnYeuthich"
+                        android:backgroundTint="@color/purple_700"
                         android:ellipsize="end"
                         android:text="Yêu thích"
-                        android:textSize="14sp"
-                        android:backgroundTint="@color/purple_700"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -123,27 +126,27 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="16dp"
                 android:text="Nội dung tóm tắt"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:paddingTop="16dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="4dp"
                 android:text="tom tat tai day"
-                android:textSize="16sp"
-                android:paddingTop="4dp" />
+                android:textSize="16sp" />
 
             <!-- Danh mục liên quan -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="16dp"
                 android:text="Danh sách chương"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:paddingTop="16dp" />
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvChapters"
