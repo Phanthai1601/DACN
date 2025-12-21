@@ -15,15 +15,19 @@ import com.example.n02_appcomic.model.Category;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+
     private Context context;
     private List<Category> categoryList;
     private OnCategoryClickListener listener;
+    private int selectedPosition = 0;
 
     public interface OnCategoryClickListener {
         void onCategoryClick(Category category);
     }
 
-    public CategoryAdapter(Context context, List<Category> categoryList, OnCategoryClickListener listener) {
+    public CategoryAdapter(Context context,
+                           List<Category> categoryList,
+                           OnCategoryClickListener listener) {
         this.context = context;
         this.categoryList = categoryList;
         this.listener = listener;
@@ -32,7 +36,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false);
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.item_category, parent, false);
         return new CategoryViewHolder(view);
     }
 
@@ -41,17 +46,34 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category category = categoryList.get(position);
         holder.tvCategoryName.setText(category.getName());
 
+        // Selected UI
+        if (position == selectedPosition) {
+            holder.tvCategoryName.setTextColor(context.getColor(R.color.white));
+            holder.itemView.setBackgroundResource(R.drawable.bg_category_selected);
+        } else {
+            holder.tvCategoryName.setTextColor(context.getColor(R.color.black));
+            holder.itemView.setBackgroundResource(R.drawable.bg_category_normal);
+        }
+
         holder.itemView.setOnClickListener(v -> {
-            listener.onCategoryClick(category);
+            int oldPos = selectedPosition;
+            selectedPosition = holder.getAdapterPosition();
+
+            notifyItemChanged(oldPos);
+            notifyItemChanged(selectedPosition);
+
+            if (listener != null) {
+                listener.onCategoryClick(category);
+            }
         });
     }
 
     @Override
     public int getItemCount() {
-        return categoryList.size();
+        return categoryList == null ? 0 : categoryList.size();
     }
 
-    public static class CategoryViewHolder extends RecyclerView.ViewHolder {
+    static class CategoryViewHolder extends RecyclerView.ViewHolder {
         TextView tvCategoryName;
 
         public CategoryViewHolder(@NonNull View itemView) {
@@ -60,4 +82,3 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
     }
 }
-
