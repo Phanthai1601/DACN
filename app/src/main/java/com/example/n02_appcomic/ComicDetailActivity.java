@@ -82,9 +82,9 @@ public class ComicDetailActivity extends AppCompatActivity {
                         for (ServerData chapter : chapterList) {
                             apiList.add(chapter.getChapterAPIData());
                         }
-                        Intent intent = new Intent(ComicDetailActivity.this, ReadChapterActivity.class);
-                        intent.putStringArrayListExtra("chapter_api_list", apiList);
-                        intent.putExtra("current_index", 0);
+                        Intent intent = new Intent(this, ReadChapterActivity.class);
+                        intent.putExtra("slug", item.getSlug());
+                        intent.putExtra("current_index",0);
                         intent.putExtra("comic_name", item.getName());
                         startActivity(intent);
                     });
@@ -94,9 +94,9 @@ public class ComicDetailActivity extends AppCompatActivity {
                         for (ServerData chapter : chapterList) {
                             apiList.add(chapter.getChapterAPIData());
                         }
-                        Intent intent = new Intent(ComicDetailActivity.this, ReadChapterActivity.class);
-                        intent.putStringArrayListExtra("chapter_api_list", apiList);
-                        intent.putExtra("current_index", chapterList.size() - 1);
+                        Intent intent = new Intent(this, ReadChapterActivity.class);
+                        intent.putExtra("slug", item.getSlug());
+                        intent.putExtra("current_index",chapterList.size() - 1);
                         intent.putExtra("comic_name", item.getName());
                         startActivity(intent);
                     });
@@ -109,9 +109,9 @@ public class ComicDetailActivity extends AppCompatActivity {
                         }
                         int index = chapterList.indexOf(chapter);
 
-                        Intent intent = new Intent(ComicDetailActivity.this, ReadChapterActivity.class);
-                        intent.putStringArrayListExtra("chapter_api_list", apiList);
-                        intent.putExtra("current_index", index);
+                        Intent intent = new Intent(this, ReadChapterActivity.class);
+                        intent.putExtra("slug", item.getSlug());
+                        intent.putExtra("current_index",index);
                         intent.putExtra("comic_name", item.getName());
                         startActivity(intent);
                     });

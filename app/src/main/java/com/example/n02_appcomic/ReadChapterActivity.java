@@ -1,14 +1,11 @@
 package com.example.n02_appcomic;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -18,71 +15,110 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.n02_appcomic.adapter.ChapterImageAdapter;
+import com.example.n02_appcomic.bottom_sheet.ChapterBottomSheet;
 import com.example.n02_appcomic.model.ChapterImage;
+import com.example.n02_appcomic.model.ServerData;
 import com.example.n02_appcomic.model.responsive.ChapterContentResponse;
 import com.example.n02_appcomic.viewmodel.ComicViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-//public class ReadChapterActivity extends AppCompatActivity {
-//    private ComicViewModel comicViewModel;
-//    private ChapterImageAdapter chapterImageAdapter;
-//
-//
-//    @Override
-//    protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_reading_chapter);
-//        RecyclerView recyclerView = findViewById(R.id.rcvImageChapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        comicViewModel = new ViewModelProvider(this).get(ComicViewModel.class);
-//        String chapterApiUrl = getIntent().getStringExtra("chapter_api_url");
-//        comicViewModel.getChapterImages(chapterApiUrl).observe(this, response -> {
-//            List<ChapterImage> chapterImages = response.getData().getItem().getChapter_image();
-//            chapterImageAdapter = new ChapterImageAdapter(chapterImages, response.getData().getDomain_cdn(), response.getData().getItem().getChapter_path());
-//            recyclerView.setAdapter(chapterImageAdapter);
-//        });
-//
-//
-//    }
-//}
 public class ReadChapterActivity extends AppCompatActivity {
+
     private ComicViewModel comicViewModel;
     private ChapterImageAdapter chapterImageAdapter;
     private RecyclerView recyclerView;
 
-    private List<String> chapterApiList;
+    private ArrayList<ServerData> chapterList = new ArrayList<>();
     private int currentIndex = 0;
-    private Observer<ChapterContentResponse> chapterObserver;
-    private AppCompatTextView tvNameComic;
-    private ImageView imvBack;
+    private String slug;
 
+    private AppCompatTextView tvNameComic, txtCurrentChapter;
+    private ImageView imvBack, btnPrev, btnNext;
+
+    private Observer<ChapterContentResponse> chapterObserver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading_chapter);
+
+        // ===== Intent =====
+        slug = getIntent().getStringExtra("slug");
+        currentIndex = getIntent().getIntExtra("current_index", 0);
+        String comicName = getIntent().getStringExtra("comic_name");
+
+        // ===== View =====
         recyclerView = findViewById(R.id.rcvImageChapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(false);
+
+        tvNameComic = findViewById(R.id.name_comic_txt);
+        txtCurrentChapter = findViewById(R.id.txtCurrentChapter);
         imvBack = findViewById(R.id.imgBack);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_reading_chapter), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        btnPrev = findViewById(R.id.btnPreviousChapter);
+        btnNext = findViewById(R.id.btnNextChapter);
+
+        tvNameComic.setText(comicName);
+
+        ViewCompat.setOnApplyWindowInsetsListener(
+                findViewById(R.id.activity_reading_chapter),
+                (v, insets) -> {
+                    Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                    return insets;
+                }
+        );
 
         comicViewModel = new ViewModelProvider(this).get(ComicViewModel.class);
 
-        chapterApiList = getIntent().getStringArrayListExtra("chapter_api_list");
-        currentIndex = getIntent().getIntExtra("current_index", 0);
-        String comicName = getIntent().getStringExtra("comic_name");
-        tvNameComic = findViewById(R.id.name_comic_txt);
-        tvNameComic.setText(comicName);
-
-        Button btnPrev = findViewById(R.id.btnPreviousChapter);
-        Button btnNext = findViewById(R.id.btnNextChapter);
+        initObserver();
         initAction();
+
+        loadChapterList();
+    }
+
+    // ================= LOAD CHAPTER LIST =================
+    private void loadChapterList() {
+        comicViewModel.getComicDetail(slug).observe(this, item -> {
+            if (item == null || item.getChapters() == null) return;
+
+            chapterList.clear();
+            chapterList.addAll(
+                    item.getChapters().get(0).getServer_data()
+            );
+
+            loadChapter();
+        });
+    }
+
+    // ================= OBSERVER =================
+    private void initObserver() {
+        chapterObserver = response -> {
+            if (response == null || response.getData() == null) return;
+
+            List<ChapterImage> images =
+                    response.getData().getItem().getChapter_image();
+
+            chapterImageAdapter = new ChapterImageAdapter(
+                    this,
+                    images,
+                    response.getData().getDomain_cdn(),
+                    response.getData().getItem().getChapter_path()
+            );
+
+            recyclerView.setAdapter(chapterImageAdapter);
+            recyclerView.scrollToPosition(0);
+
+            updateNavigationUI();
+        };
+    }
+
+    // ================= ACTION =================
+    private void initAction() {
+
+        imvBack.setOnClickListener(v -> finish());
 
         btnPrev.setOnClickListener(v -> {
             if (currentIndex > 0) {
@@ -92,71 +128,45 @@ public class ReadChapterActivity extends AppCompatActivity {
         });
 
         btnNext.setOnClickListener(v -> {
-            if (currentIndex < chapterApiList.size() - 1) {
+            if (currentIndex < chapterList.size() - 1) {
                 currentIndex++;
                 loadChapter();
             }
         });
 
-        // Observer chỉ tạo 1 lần
-        chapterObserver = response -> {
-            if (response != null && response.getData() != null) {
-                /// ///
-                String chapterName = response.getData().getItem().getChapter_name();
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle("Chap " + chapterName);
-                }
-                /// ///
-                List<ChapterImage> chapterImages = response.getData().getItem().getChapter_image();
-                chapterImageAdapter = new ChapterImageAdapter(
-                        this,
-                        chapterImages,
-                        response.getData().getDomain_cdn(),
-                        response.getData().getItem().getChapter_path()
-                );
-                recyclerView.setAdapter(chapterImageAdapter);
-                recyclerView.scrollToPosition(0);
-            }
-        };
-
-        loadChapter(); // load chap đầu tiên
+        txtCurrentChapter.setOnClickListener(v -> {
+            ChapterBottomSheet bottomSheet = new ChapterBottomSheet(
+                    chapterList,
+                    currentIndex,
+                    chapter -> {
+                        currentIndex = chapterList.indexOf(chapter);
+                        loadChapter();
+                    }
+            );
+            bottomSheet.show(getSupportFragmentManager(), "ChapterBottomSheet");
+        });
     }
 
-    private void initAction(){
-        imvBack.setOnClickListener(v -> onBackPressed());
-    }
-
+    // ================= LOAD CHAPTER =================
     private void loadChapter() {
-        if (chapterApiList == null || chapterApiList.isEmpty()) return;
-        // Cập nhật trạng thái nút
-        Button btnPrev = findViewById(R.id.btnPreviousChapter);
-        Button btnNext = findViewById(R.id.btnNextChapter);
+        if (chapterList.isEmpty()) return;
 
-        // Trạng thái nút Prev
-        if (currentIndex > 0) {
-            btnPrev.setEnabled(true);
-            btnPrev.setBackgroundColor(getResources().getColor(R.color.purple_500)); // màu active
-            btnPrev.setTextColor(Color.WHITE);
-        } else {
-            btnPrev.setEnabled(false);
-            btnPrev.setBackgroundColor(Color.LTGRAY); // màu xám khi disable
-            btnPrev.setTextColor(Color.DKGRAY);
-        }
+        String apiUrl = chapterList.get(currentIndex).getChapterAPIData();
+        comicViewModel.getChapterImages(apiUrl)
+                .observe(this, chapterObserver);
+    }
 
-        // Trạng thái nút Next
-        if (currentIndex < chapterApiList.size() - 1) {
-            btnNext.setEnabled(true);
-            btnNext.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            btnNext.setTextColor(Color.WHITE);
-        } else {
-            btnNext.setEnabled(false);
-            btnNext.setBackgroundColor(Color.LTGRAY);
-            btnNext.setTextColor(Color.DKGRAY);
-        }
+    // ================= UI =================
+    private void updateNavigationUI() {
 
-        String apiUrl = chapterApiList.get(currentIndex);
-        comicViewModel.getChapterImages(apiUrl).observe(this, chapterObserver);
+        txtCurrentChapter.setText(
+                "Chap " + (currentIndex + 1) + " / " + chapterList.size()
+        );
+
+        btnPrev.setEnabled(currentIndex > 0);
+        btnNext.setEnabled(currentIndex < chapterList.size() - 1);
+
+        btnPrev.setAlpha(btnPrev.isEnabled() ? 1f : 0.3f);
+        btnNext.setAlpha(btnNext.isEnabled() ? 1f : 0.3f);
     }
 }
-
-

@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private EditText edt_Email, edt_password, edt_re_pass, edt_username, edt_otp;
     private Button btn_signup, btn_otp;
+    private ImageView backImv;
     private DatabaseHelper dbHelper;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -44,10 +46,12 @@ public class SignUpActivity extends AppCompatActivity {
         edt_re_pass = findViewById(R.id.edt_re_pass);
         edt_username = findViewById(R.id.edt_username);
         btn_signup = findViewById(R.id.btn_signup);
+        backImv = findViewById(R.id.back_imv);
         View root = findViewById(R.id.main);
         edt_password.setCompoundDrawablesWithIntrinsicBounds(
                 0, 0, R.drawable.eye_close, 0
         );
+        backImv.setOnClickListener(v -> finish());
 
 
         // 3. Thiết lập EdgeToEdge padding
@@ -71,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
             if (event.getAction() == MotionEvent.ACTION_UP) {
 
                 if (edt_password.getCompoundDrawables()[DRAWABLE_RIGHT] == null)
-                    return false; // ✅ FIX CRASH
+                    return false;
 
                 int drawableWidth =
                         edt_password.getCompoundDrawables()[DRAWABLE_RIGHT]
@@ -124,9 +128,6 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         } else if (!isValidUsername(username)) {
             Toast.makeText(this, "User name tối đa 20 ký tự.", Toast.LENGTH_SHORT).show();
-            return;
-        } else if (!edt_otp.getText().toString().equals("123456")) {
-            Toast.makeText(this, "Mã OTP không đúng.", Toast.LENGTH_SHORT).show();
             return;
         }
         // Insert vào bảng "users"
